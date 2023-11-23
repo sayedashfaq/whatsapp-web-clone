@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { MoreVert, Search } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import { defaultProfilePicture } from "../../../constants/data";
 import { AccountContext } from "../../../context/AccountProvider";
 const Header = styled(Box)`
   height: 44px;
@@ -31,21 +30,31 @@ const RightContainer = styled(Box)`
     color: #000;
   }
 `;
+// ... (other imports)
 
 const Status = styled(Typography)`
   font-size: 12px !important;
-  color: rgb(0, 0, 0, 0.6);
+  color: ${(props) => (props.online ? "green" : "red")};
   margin-left: 12px !important;
 `;
 
-function ChatHeader() {
-  const {person} = useContext(AccountContext);
+function ChatHeader({person}) {
+  const { activeUsers } = useContext(AccountContext);
+  console.log("person.sub:", person.sub);
+  console.log("activeUsers:", activeUsers);
+
+  const isPersonOnline = activeUsers?.some((user) => user.sub === person.sub);
+  console.log("isPersonOnline:", isPersonOnline);
+
+
   return (
     <Header>
       <Image src={person.picture} alt="dp" />
       <Box>
         <Name>{person.name}</Name>
-        <Status>Offline</Status>
+        <Status online={isPersonOnline}>
+          {isPersonOnline ? "Online" : "Offline"}
+        </Status>
       </Box>
       <RightContainer>
         <Search />

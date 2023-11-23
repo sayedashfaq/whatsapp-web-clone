@@ -8,3 +8,5 @@ export const qrCodeImage =
   "https://www.ginifab.com/feeds/qr_code/img/qrcode.jpg";
 export const emptyProfilePicture =
   "https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png";
+export  const clientId =
+  "702225708435-pn1lhgmeeehtb1kis55op4pmrlnijq91.apps.googleusercontent.com";
